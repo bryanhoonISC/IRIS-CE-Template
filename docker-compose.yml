@@ -13,4 +13,4 @@ services:
       - ./dur:/dur
     environment:
       - ISC_DATA_DIRECTORY=/dur/iris_conf.d
-      - ISC_CPF_MERGE_FILE=/dur/merge/merge.cpf
+      - ISC_CPF_MERGE_FILE=/home/irisowner/dev/merge.cpf
