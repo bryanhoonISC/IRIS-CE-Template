@@ -7,8 +7,10 @@ services:
     restart: always
     ports:
       - 1972
-      - 55038:52773
-      - 53773
-      - 55030:5000
+      - 52773
     volumes:
       - ./:/home/irisowner/dev
+      - ./dur:/dur
+    environment:
+      - ISC_DATA_DIRECTORY=/dur/iris_conf.d
+      - ISC_CPF_MERGE_FILE=/dur/merge/merge.cpf
