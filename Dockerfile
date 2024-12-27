@@ -1,5 +1,4 @@
 ARG IMAGE=intersystemsdc/irishealth-community
-ARG IMAGE=intersystemsdc/iris-community:preview
 ARG IMAGE=intersystemsdc/iris-community
 FROM $IMAGE
 
@@ -22,5 +21,4 @@ RUN --mount=type=bind,src=.,dst=. \
     pip3 install -r requirements.txt && \
     iris start IRIS && \
     iris merge IRIS merge.cpf && \
-    irispython iris_script.py && \
     iris stop IRIS quietly
