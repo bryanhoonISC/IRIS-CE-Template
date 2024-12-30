@@ -1,4 +1,3 @@
-version: '3.6'
 services:
   iris:
     build:
@@ -10,7 +9,7 @@ services:
       - 52773
     volumes:
       - ./:/home/irisowner/dev
-      - ./dur:/dur
+      - ../shared:/shared
     environment:
-      - ISC_DATA_DIRECTORY=/dur/iris_conf.d
-      - ISC_CPF_MERGE_FILE=/home/irisowner/dev/merge.cpf
+      - ISC_DATA_DIRECTORY=/shared/dur
+    #   # - ISC_CPF_MERGE_FILE=/home/irisowner/dev/merge.cpf

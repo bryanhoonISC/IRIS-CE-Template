@@ -9,6 +9,11 @@
     set prop("AutheEnabled")=48
     do ##class(Security.Services).Modify("%Service_CallIn",.prop)
 
-    zn "USER"
-    zpm "load /home/irisowner/dev/ -v":1:1
+    zn "IRISAPP"
+    do $System.OBJ.LoadDir("/home/irisowner/dev/src","ck",,1)
+    
+    ; Change DB to READ-ONLY so that code can be updatable, so that it is not persisted by DURABLE %SYS
+    do ##class(DBSetup.Utils).SetupDBPermissions("/usr/irissys/mgr/IRISAPP_CODE/",1)
+
+    ; zpm "load /home/irisowner/dev/ -v":1:1
     halt
