@@ -2,7 +2,7 @@ Class dc.sample.PersistentClass Extends %Persistent
 {
 
 Property Test As %VarString;
-
+/// do ##class(dc.sample.PersistentClass).CreateRecord(.id)
 ClassMethod CreateRecord(ByRef id As %Integer) As %Status
 {
     set sc=$$$OK
@@ -85,6 +85,24 @@ if iris.cls('dc.sample.PersistentClass')._ExistsId(id):
 else:
  print(id,'is not an existing ID in dc.sample.PersistentClass')
 return sc
+}
+
+Storage Default
+{
+<Data name="PersistentClassDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Test</Value>
+</Value>
+</Data>
+<DataLocation>^dc.sample.PersistentClassD</DataLocation>
+<DefaultData>PersistentClassDefaultData</DefaultData>
+<IdLocation>^dc.sample.PersistentClassD</IdLocation>
+<IndexLocation>^dc.sample.PersistentClassI</IndexLocation>
+<StreamLocation>^dc.sample.PersistentClassS</StreamLocation>
+<Type>%Storage.Persistent</Type>
 }
 
 }

@@ -1,3 +1,6 @@
+## TO DO
+Currently, defining IRISAPP_CODE DB as mount only in iris.script during build phase results in unusable mgmt portal SQL for IRISAPP namespace, select 1 -> ERROR #5002: ObjectScript error: <UNDEFINED>ShowPlan+6^%apiSQL *sqlOrig. (other namespaces work fine...). Terminal SQL works OK for IRISAPP.
+
 ## IRIS-CommunityEdition-template
 This is a template to work with InterSystems IRIS CE Image
 It should be used as a starter kit on working with IRIS CE in CICD pipelines.
