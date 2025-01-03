@@ -11,13 +11,13 @@ Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installi
 Clone/git pull the repo into any local directory
 
 ```bash
-$ git clone https://github.com/intersystems-community/iris-embedded-python-template.git
+$ git clone https://github.com/bryanhoonISC/IRIS-CommunityEdition-Template.git
 ```
 
 Open the terminal in this directory and run:
 
 ```bash
-$ docker-compose build
+$ docker-compose build --no-cache --progress plain
 ```
 
 3. Run the IRIS container with your project:
@@ -48,7 +48,7 @@ ModifyUser:Name=SuperUser,PasswordHash=a31d24aecc0bfe560a7e45bd913ad27c667dc25a7
 ```
 As you can see it creates dabasases IRISAPP_DATA and IRISAPP_CODE for data and code, the related IRISAPP namespace to access it and the related resources %IRISAPP_DATA and %IRISAPP_CODE" to manage the access.
 
-IRISAPP_DATA is created within the /usr/irissys/mgr folder while IRISAPP_CODE is created outside the Durable %SYS folder. This is to ensure that when the container instance uses the latest codes built and stored in IRISAPP_CODE within the container instead of the historical code DB in Durable %SYS.
+IRISAPP_DATA is created within the /usr/irissys/mgr folder while IRISAPP_CODE is created outside the Durable %SYS folder in /home/irisowner/IRISAPP_CODE. This is to ensure that when the container instance uses the latest codes built and stored in IRISAPP_CODE within the container instead of the historical code DB in Durable %SYS.
 
 Also it enables Callin service to make Embedded python work via ModifyService clause.
 and it updates the password for the built-in user SuperUser to "SYS". The hash for this password is obtained via the following command:
