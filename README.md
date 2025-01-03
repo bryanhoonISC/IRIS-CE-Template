@@ -1,6 +1,3 @@
-## TO DO
-Currently, defining IRISAPP_CODE DB as mount only in iris.script during build phase results in unusable mgmt portal SQL for IRISAPP namespace, select 1 -> ERROR #5002: ObjectScript error: <UNDEFINED>ShowPlan+6^%apiSQL *sqlOrig. (other namespaces work fine...). Terminal SQL works OK for IRISAPP.
-
 ## IRIS-CommunityEdition-template
 This is a template to work with InterSystems IRIS CE Image
 It should be used as a starter kit on working with IRIS CE in CICD pipelines.
@@ -41,15 +38,17 @@ iris merge IRIS merge.cpf && \
  that contains:
 ```
 [Actions]
-CreateResource:Name=%DB_IRISAPP_DATA,Description="IRISAPP_DATA database"
-CreateDatabase:Name=IRISAPP_DATA,Directory=/usr/irissys/mgr/IRISAPP_DATA
-CreateResource:Name=%DB_IRISAPP_CODE,Description="IRISAPP_CODE database"
-CreateDatabase:Name=IRISAPP_CODE,Directory=/usr/irissys/mgr/IRISAPP_CODE
+CreateResource:Name=%DB_IRISAPP_DATA,Description="IRISAPP_DATA database resource"
+CreateDatabase:Name=IRISAPP_DATA,Directory=/usr/irissys/mgr/IRISAPP_DATA,Resource=%DB_IRISAPP_DATA
+CreateResource:Name=%DB_IRISAPP_CODE,Description="IRISAPP_CODE database resource"
+CreateDatabase:Name=IRISAPP_CODE,Directory=/home/irisowner/IRISAPP_CODE/,Resource=%DB_IRISAPP_CODE
 CreateNamespace:Name=IRISAPP,Globals=IRISAPP_DATA,Routines=IRISAPP_CODE,Interop=1
 ModifyService:Name=%Service_CallIn,Enabled=1,AutheEnabled=48
 ModifyUser:Name=SuperUser,PasswordHash=a31d24aecc0bfe560a7e45bd913ad27c667dc25a75cbfd358c451bb595b6bd52bd25c82cafaa23ca1dd30b3b4947d12d3bb0ffb2a717df29912b743a281f97c1,0a4c463a2fa1e7542b61aa48800091ab688eb0a14bebf536638f411f5454c9343b9aa6402b4694f0a89b624407a5f43f0a38fc35216bb18aab7dc41ef9f056b1,10000,SHA512
 ```
 As you can see it creates dabasases IRISAPP_DATA and IRISAPP_CODE for data and code, the related IRISAPP namespace to access it and the related resources %IRISAPP_DATA and %IRISAPP_CODE" to manage the access.
+
+IRISAPP_DATA is created within the /usr/irissys/mgr folder while IRISAPP_CODE is created outside the Durable %SYS folder. This is to ensure that when the container instance uses the latest codes built and stored in IRISAPP_CODE within the container instead of the historical code DB in Durable %SYS.
 
 Also it enables Callin service to make Embedded python work via ModifyService clause.
 and it updates the password for the built-in user SuperUser to "SYS". The hash for this password is obtained via the following command:

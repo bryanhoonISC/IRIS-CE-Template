@@ -1,12 +1,13 @@
 ARG IMAGE=intersystemsdc/irishealth-community
 ARG IMAGE=intersystemsdc/iris-community
+ARG IMAGE=containers.intersystems.com/intersystems/iris-community:2024.3
 FROM $IMAGE
 
 # USER root
 # RUN apt-get update && apt-get -y upgrade \ 
 #  && apt-get -y install unattended-upgrades
 
-USER 51773 
+USER 51773
 
 WORKDIR /home/irisowner/dev
 
